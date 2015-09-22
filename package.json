@@ -25,6 +25,7 @@
     "alt": "^0.17.3",
     "array.prototype.findindex": "^1.0.0",
     "node-uuid": "^1.4.3",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-dnd": "^1.1.8"
   }
 }
