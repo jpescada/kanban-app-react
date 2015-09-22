@@ -8,7 +8,11 @@ class NoteStore {
 
 		this.notes = [];
 
-		this.dispatcher.register( console.log.bind(console) );
+		// this.dispatcher.register( console.log.bind(console) );
+
+		this.exportPublicMethods({
+			get: this.get.bind(this)
+		});
 	}
 
 	create(note) {
@@ -53,6 +57,15 @@ class NoteStore {
 
 		return noteIndex;
 	}
+
+	get(ids) {
+		return ( ids || [] ).map( (id) => this.notes[this.findNote(id)] ).filter( (a) => a);
+	}
 }
 
 export default alt.createStore(NoteStore, 'NoteStore');
+
+
+
+
+

@@ -1,4 +1,4 @@
-require('./main.css');
+require('./stylesheets/main.css');
 
 import alt from './libs/alt';
 import storage from './libs/storage';
@@ -11,7 +11,7 @@ main();
 function main(){
 
 	persist( alt, storage, 'app');
-	
+
 	const app =  document.createElement('div');
 
 	document.body.appendChild(app);
