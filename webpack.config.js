@@ -14,21 +14,6 @@ var common = {
 	output: {
 		path: path.resolve(ROOT_PATH, 'build'),
 		filename: 'bundle.js'
-	},
-
-	module: {
-		loaders: [
-			{
-				test: /\.css$/,
-				loaders: ['style','css'],
-				include: path.resolve(ROOT_PATH, 'app')
-			},
-			{
-				test: /\.jsx?$/,
-				loaders: ['react-hot', 'babel'],
-				include: path.resolve(ROOT_PATH, 'app')
-			}
-		]
 	}
 };
 
@@ -37,6 +22,21 @@ if (TARGET === 'start' || !TARGET) {
 	module.exports = merge(common, {
 	
 		devtool: 'eval-source-map',
+
+		module: {
+			loaders: [
+				{
+					test: /\.css$/,
+					loaders: ['style','css'],
+					include: path.resolve(ROOT_PATH, 'app')
+				},
+				{
+					test: /\.jsx?$/,
+					loaders: ['react-hot', 'babel'],
+					include: path.resolve(ROOT_PATH, 'app')
+				}
+			]
+		},
 
 		devServer: {
 			historyApiFallback: true,
@@ -53,4 +53,49 @@ if (TARGET === 'start' || !TARGET) {
 		]
 	});
 }
+
+if (TARGET === 'build') {
+	module.exports = merge(common, {
+
+		devtool: 'source-map',
+
+		module: {
+			loaders: [
+				{
+					test: /\.css$/,
+					loaders: ['style','css'],
+					include: path.resolve(ROOT_PATH, 'app')
+				},
+				{
+					test: /\.jsx?$/,
+					loaders: ['babel'],
+					include: path.resolve(ROOT_PATH, 'app')
+				}
+			]
+		},
+
+		plugins: [
+			new webpack.DefinePlugin({
+				'process.env': {
+					'NODE_ENV': JSON.stringify('production')
+				}
+			}),
+			new webpack.optimize.UglifyJsPlugin({
+				compress: {
+					warnings: false
+				}
+			})
+		]
+	});
+}
+
+
+
+
+
+
+
+
+
+
 
