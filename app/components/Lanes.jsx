@@ -1,4 +1,4 @@
-require('../stylesheets/_lanes.css');
+// require('../stylesheets/_lanes.css');
 
 import React from 'react';
 import Lane from './Lane.jsx';

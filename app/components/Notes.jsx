@@ -1,4 +1,4 @@
-require('../stylesheets/_notes.css');
+// require('../stylesheets/_notes.css');
 
 import React from 'react';
 import Editable from './Editable.jsx';

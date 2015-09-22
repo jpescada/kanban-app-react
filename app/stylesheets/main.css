@@ -2,3 +2,6 @@ body {
 	background: cornsilk;
 	font-family: sans-serif;
 }
+
+@import '_lanes.css';
+@import '_notes.css';
