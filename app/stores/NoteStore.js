@@ -7,6 +7,8 @@ class NoteStore {
 		this.bindActions(NoteActions);
 
 		this.notes = [];
+
+		this.dispatcher.register( console.log.bind(console) );
 	}
 
 	create(note) {
