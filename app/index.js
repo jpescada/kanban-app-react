@@ -12,9 +12,15 @@ function main(){
 
 	persist( alt, storage, 'app');
 
-	const app =  document.createElement('div');
+	if (process.env.NODE_ENV === 'production') {
+		Rect.render(<App />, document.getElementById('app'));
+	}
 
-	document.body.appendChild(app);
+	if (process.env.NODE_ENV !== 'production') {
+		const app =  document.createElement('div');
 
-	React.render(<App />, app);
+		document.body.appendChild(app);
+
+		React.render(<App />, app);
+	}
 }

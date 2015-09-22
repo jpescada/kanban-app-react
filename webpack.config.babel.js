@@ -1,3 +1,6 @@
+var fs = require('fs');
+var React = require('react');
+
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
@@ -5,12 +8,15 @@ var merge = require('webpack-merge');
 var Clean = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+var App = require('./app/components/App.jsx');
 var pkg = require('./package.json');
 
-var TARGET = process.env.npm_lifecycle_event;
-var ROOT_PATH = path.resolve(__dirname);
 
-var common = {
+const TARGET = process.env.npm_lifecycle_event;
+const ROOT_PATH = path.resolve(__dirname);
+const APP_TITLE = 'Kanban app';
+
+const common = {
 	
 	entry: path.resolve(ROOT_PATH, 'app'),
 	
@@ -21,13 +27,7 @@ var common = {
 	output: {
 		path: path.resolve(ROOT_PATH, 'build'),
 		filename: 'bundle.js'
-	},
-
-	plugins: [
-		new HtmlWebpackPlugin({
-			title: 'Kanban app'
-		})
-	]
+	}
 };
 
 
@@ -59,7 +59,10 @@ if (TARGET === 'start' || !TARGET) {
 		},
 
 		plugins: [
-			new webpack.HotModuleReplacementPlugin()
+			new webpack.HotModuleReplacementPlugin(),
+			new HtmlWebpackPlugin({
+				title: APP_TITLE
+			})
 		]
 	});
 }
@@ -110,9 +113,26 @@ if (TARGET === 'build') {
 				compress: {
 					warnings: false
 				}
+			}),
+			new HtmlWebpackPlugin({
+				title: APP_TITLE,
+				templateContent: renderTemplate(
+					fs.readFileSync(path.join(__dirname, 'templates/index.tpl'), 'utf8'),
+					{
+						app: React.renderToString(<App />)
+					})
 			})
 		]
 	});
+}
+
+function renderTemplate(template, replacements) {
+	return function(){
+		return template.replace(/%(\w*)%/g, function(match) {
+			var key = match.slice(1, -1);
+			return replacements[key] ? replacements[key] : match;
+		});
+	};
 }
 
 
