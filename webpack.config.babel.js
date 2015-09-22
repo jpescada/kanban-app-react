@@ -27,6 +27,21 @@ const common = {
 	output: {
 		path: path.resolve(ROOT_PATH, 'build'),
 		filename: 'bundle.js'
+	},
+
+	module: {
+		preLoaders: [
+			{
+				test: /\.css$/,
+				loaders: ['csslint'],
+				include: path.resolve(ROOT_PATH, 'app')
+			},
+			{
+				test: /\.jsx?$/,
+				loaders: ['eslint'],
+				include: path.resolve(ROOT_PATH, 'app')
+			}
+		]	
 	}
 };
 
