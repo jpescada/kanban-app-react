@@ -118,7 +118,7 @@ class LaneStore {
 	}
 
 	move({sourceId, targetId}) {
-		console.log('source:', sourceId, 'target:', targetId);
+		// console.log('source:', sourceId, 'target:', targetId);
 
 		const lanes = this.lanes;
 		const sourceLane = lanes.filter( (lane) => {

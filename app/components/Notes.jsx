@@ -35,7 +35,7 @@ export default class Notes extends React.Component {
 		);
 	}
 
-	onMoveNote({sourceId, targetId}) {
-		console.log('source:', sourceId, 'target:', targetId);
-	}
+	// onMoveNote({sourceId, targetId}) {
+	// 	// console.log('source:', sourceId, 'target:', targetId);
+	// }
 }

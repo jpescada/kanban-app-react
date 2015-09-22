@@ -77,7 +77,7 @@ export default class Lane extends React.Component {
 	}
 
 	editName(id, name) {
-		console.log('edited lane name', id, name);
+		// console.log('edited lane name', id, name);
 
 		if (name) {
 			LaneActions.update({id, name});
